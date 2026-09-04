@@ -1,0 +1,9 @@
+services:
+
+  postgres:
+    container_name: postgres
+    image: postgres:18
+    environment:
+      PG_PASSWORD: postgres
+    ports:
+      - 5432:5432

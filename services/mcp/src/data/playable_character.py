@@ -1,24 +1,9 @@
 from pydantic import BaseModel, Field
 
-migration = """
-CREATE EXTENTION IF NOT EXISTS hstore;
-
-CREATE TABLE IF NOT EXISTS playable_characters (
-    pc_id SERIAL PRIMARY KEY,
-
-    name TEXT NOT NULL,
-
-    stats HSTORE NOT NULL
-);
-"""
-
 
 class PCStats(BaseModel):
     level: int = Field(default=1, ge=1)
-    race: str
-    classs: int = Field(alias="class")
-    background: int
-    alignment: int
+    xp: int
 
     strength: int
     dexterity: int
@@ -78,8 +63,53 @@ class PCStats(BaseModel):
     death_saves_successes: int = Field(le=3)
     death_saves_failures: int = Field(le=3)
 
+    spell_cast_ability: int
+    spell_save_dc: int
+    spell_attack_bonus: int
+
+
+class PCAttack(BaseModel):
+    name: str
+    bonus: int
+    damage: int
+    type: str
+
+
+class PCSpell(BaseModel):
+    name: str
+    level: int
+    prepared: bool
+
+
+class PlayableCharacter(BaseModel):
+    pc_id: int
+
+    name: str
+    race: str
+    classs: str = Field(alias="class")
+    spellcasting_class: str
+    background: str
+    alignment: str
+
+    age: int
+    height: int = Field(description="Character height in feet.")
+    wight: int = Field(description="Character height in pounds.")
+    eyes: str
+    skin: str
+    hair: str
+
+    stats: PCStats
+    spell_slots: tuple[int, int, int, int, int, int, int, int, int]
+
+    other_proficiencies_and_languages: list[str]
+    equipment: list[str]
+    features_and_traits: list[str]
+
     copper: int
     silver: int
     emerald: int
     gold: int
     platinum: int
+
+    attacks: list[PCAttack]
+    spells: list[PCSpell]
