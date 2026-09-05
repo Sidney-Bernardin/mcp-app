@@ -1,3 +1,6 @@
+from typing import cast
+
+from asyncpg import Connection
 from mcp.server.mcpserver import Context
 
 from rollbringer_mcp.main import LifespanContext, mcp
@@ -15,16 +18,10 @@ async def get_pc(ctx: Context[LifespanContext], name: str):
         JSON object representing the requested character.
     """
 
-    row = await ctx.request_context.lifespan_context.pg.fetchrow(
-        """
-        SELECT * FROM
-        playable_characters
-        WHERE name = '$1'
-        """,
-        name,
-    )
-
-    return str(row)
+    async with ctx.request_context.lifespan_context.pg.acquire() as _conn:
+        conn = cast(Connection, _conn)
+        async with conn.transaction():
+            pass
 
 
 @mcp.tool(title="Update Playable Character")

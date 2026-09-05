@@ -33,11 +33,13 @@ CREATE TABLE IF NOT EXISTS playable_characters (
 
 CREATE TABLE IF NOT EXISTS pc_attacks (
     pc_id SERIAL REFERENCES playable_characters(pc_id),
-
     name TEXT NOT NULL,
+
     bonus INT NOT NULL,
     damage TEXT NOT NULL,
     type TEXT NOT NULL
+
+    PRIMARY KEY (pc_id, name)
 );
 
 CREATE TABLE IF NOT EXISTS pc_spells (
