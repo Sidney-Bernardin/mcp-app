@@ -1,16 +1,10 @@
-from contextlib import asynccontextmanager
-from dataclasses import dataclass
-
-import asyncpg
-from mcp.server import MCPServer
 from mcp.server.mcpserver import Context
 
-import config
-import mcp
+from rollbringer_mcp.main import LifespanContext, mcp
 
 
 @mcp.resource("characters://playable/{pc_id}", title="Get Playable Character")
-async def get_pc(name: str):
+async def get_pc(ctx: Context[LifespanContext], name: str):
     """
     Get playable character.
 
@@ -21,7 +15,7 @@ async def get_pc(name: str):
         JSON object representing the requested character.
     """
 
-    pc = await pg.fetchrow(
+    row = await ctx.request_context.lifespan_context.pg.fetchrow(
         """
         SELECT * FROM
         playable_characters
@@ -30,15 +24,10 @@ async def get_pc(name: str):
         name,
     )
 
-    return f"Hello, {name}!"
+    return str(row)
 
 
 @mcp.tool(title="Update Playable Character")
 async def update_pc(ctx: Context, pc_id: str):
     """Add two numbers."""
     await ctx.notify_resource_updated(f"characters://playable/{pc_id}")
-
-
-@mcp.prompt()
-def summarize_pc(pc_id: str):
-    return f"Summarize this text in one sentance:\n\n{text}"

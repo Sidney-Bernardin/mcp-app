@@ -1,4 +1,4 @@
-CREATE EXTENTION IF NOT EXISTS hstore;
+CREATE EXTENSION IF NOT EXISTS hstore;
 
 CREATE TABLE IF NOT EXISTS playable_characters (
     pc_id SERIAL PRIMARY KEY,
@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS playable_characters (
     hair TEXT NOT NULL,
 
     stats HSTORE NOT NULL,
-    spell_slots INT[0,0,0,0,0,0,0,0,0] NOT NULL CHECK (cardinality(spell_slots) == 10),
+    spell_slot_total INT[] DEFAULT ARRAY[0, 0, 0, 0, 0, 0, 0, 0, 0] NOT NULL CHECK (cardinality(spell_slot_total) = 9),
+    spell_slot_expended INT[] DEFAULT ARRAY[0, 0, 0, 0, 0, 0, 0, 0, 0] NOT NULL CHECK (cardinality(spell_slot_expended) = 9),
 
     other_proficiencies_and_languages TEXT[] NOT NULL,
     equipment TEXT[] NOT NULL,
@@ -35,7 +36,7 @@ CREATE TABLE IF NOT EXISTS pc_attacks (
 
     name TEXT NOT NULL,
     bonus INT NOT NULL,
-    damage TXET NOT NULL,
+    damage TEXT NOT NULL,
     type TEXT NOT NULL
 );
 
@@ -44,5 +45,5 @@ CREATE TABLE IF NOT EXISTS pc_spells (
 
     name TEXT NOT NULL,
     level INT NOT NULL,
-    prepared BOOL NOT NULL
+    prepared BOOLEAN NOT NULL
 );

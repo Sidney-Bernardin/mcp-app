@@ -3,7 +3,6 @@ from dataclasses import dataclass
 
 import asyncpg
 from mcp.server import MCPServer
-from mcp.server.mcpserver import Context
 
 import config
 
@@ -23,8 +22,8 @@ async def lifespan(mcp: MCPServer):
         yield LifespanContext(pg=pg)
 
 
-mcp = MCPServer("Demo", lifespan=lifespan)
+mcp = MCPServer("Demo", lifespan=lifespan, log_level="DEBUG")
 
 
 if __name__ == "__main__":
-    mcp.run()
+    mcp.run(transport="streamable-http")

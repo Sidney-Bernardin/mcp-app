@@ -4,6 +4,8 @@ services:
     container_name: postgres
     image: postgres:18
     environment:
-      PG_PASSWORD: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
       - 5432:5432
+    volumes:
+      - ./services/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql

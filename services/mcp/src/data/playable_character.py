@@ -99,7 +99,12 @@ class PlayableCharacter(BaseModel):
     hair: str
 
     stats: PCStats
-    spell_slots: tuple[int, int, int, int, int, int, int, int, int]
+    spell_slot_total: tuple[int, int, int, int, int, int, int, int, int] = Field(
+        description="The amount total of each spell slots for each level of spell."
+    )
+    spell_slot_expended: tuple[int, int, int, int, int, int, int, int, int] = Field(
+        description="The amount of expended spell slots for each level of spell."
+    )
 
     other_proficiencies_and_languages: list[str]
     equipment: list[str]
