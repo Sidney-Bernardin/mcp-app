@@ -1,78 +1,17 @@
 from pydantic import BaseModel, Field
 
 
-class Stats(BaseModel):
-    level: int = Field(default=1, ge=1)
-    xp: int
-
-    strength: int
-    dexterity: int
-    constitution: int
-    intelligence: int
-    wisdom: int
-    charisma: int
-
-    strength_mod: int
-    dexterity_mod: int
-    constitution_mod: int
-    intelligence_mod: int
-    wisdom_mod: int
-    charisma_mod: int
-
-    strength_sv: int
-    dexterity_sv: int
-    constitution_sv: int
-    intelligence_sv: int
-    wisdom_sv: int
-    charisma_sv: int
-
-    inspiration: int
-    proficiency_bonus: int
-    perseption: int
-
-    acrobatics: int
-    animal: int
-    arcana: int
-    athletics: int
-    deception: int
-    history: int
-    insight: int
-    intimidation: int
-    investigation: int
-    medicine: int
-    nature: int
-    perception: int
-    performance: int
-    persuasion: int
-    religion: int
-    sleight_of_hand: int
-    stealth: int
-    survival: int
-
-    armor_class: int
-    initiative: int
-    speed: int
-
-    hp_max: int
-    hp_current: int
-    hp_temp: int
-
-    hit_dice: str
-    hit_dice_total: int
-
-    death_saves_successes: int = Field(le=3)
-    death_saves_failures: int = Field(le=3)
-
-    spell_cast_ability: int
-    spell_save_dc: int
-    spell_attack_bonus: int
-
-
 class Attack(BaseModel):
     name: str
     bonus: int
     damage: int
     type: str
+
+
+class SpellSlot(BaseModel):
+    level: str
+    total: str
+    expended: str
 
 
 class Spell(BaseModel):
@@ -85,138 +24,179 @@ class PlayableCharacter(BaseModel):
     pc_id: int
 
     name: str
-    race: str
     classs: str = Field(alias="class")
-    spellcasting_class: str
+    level: str
     background: str
+    race: str
     alignment: str
+    xp: str
 
-    age: int
-    height: int = Field(description="Character height in feet.")
-    wight: int = Field(description="Character height in pounds.")
+    strength: str
+    dexterity: str
+    constitution: str
+    intelligence: str
+    wisdom: str
+    charisma: str
+
+    strength_mod: str
+    dexterity_mod: str
+    constitution_mod: str
+    intelligence_mod: str
+    wisdom_mod: str
+    charisma_mod: str
+
+    strength_sv: str
+    dexterity_sv: str
+    constitution_sv: str
+    intelligence_sv: str
+    wisdom_sv: str
+    charisma_sv: str
+
+    inspiration: str
+    proficiency_bonus: str
+    perseption: str
+
+    acrobatics: str
+    animal: str
+    arcana: str
+    athletics: str
+    deception: str
+    history: str
+    insight: str
+    intimidation: str
+    investigation: str
+    medicine: str
+    nature: str
+    perception: str
+    performance: str
+    persuasion: str
+    religion: str
+    sleight_of_hand: str
+    stealth: str
+    survival: str
+
+    armor_class: str
+    initiative: str
+    speed: str
+
+    hp_max: str
+    hp_current: str
+    hp_temp: str
+
+    hit_dice: str
+    hit_dice_total: str
+
+    death_saves_successes: str
+    death_saves_failures: str
+
+    other_proficiencies_and_languages: list[str]
+    equipment: list[str]
+    features_and_traits: list[str]
+
+    copper: str
+    silver: str
+    emerald: str
+    gold: str
+    platinum: str
+
+    age: str
+    height: str
+    wight: str
     eyes: str
     skin: str
     hair: str
 
-    stats: Stats
-    spell_slot_total: tuple[int, int, int, int, int, int, int, int, int] = Field(
-        description="The amount of total spell slots for each level of spell."
-    )
-    spell_slot_expended: tuple[int, int, int, int, int, int, int, int, int] = Field(
-        description="The amount of expended spell slots for each level of spell."
-    )
-
-    other_proficiencies_and_languages: list[str] = []
-    equipment: list[str] = []
-    features_and_traits: list[str] = []
-
-    copper: int
-    silver: int
-    emerald: int
-    gold: int
-    platinum: int
-
-    attacks: dict[str, Attack] = {}
-    spells: dict[str, Spell] = {}
-
-
-class UpdateFormStats(BaseModel):
-    level: int | None
-    xp: int | None
-
-    strength: int | None
-    dexterity: int | None
-    constitution: int | None
-    intelligence: int | None
-    wisdom: int | None
-    charisma: int | None
-
-    strength_mod: int | None
-    dexterity_mod: int | None
-    constitution_mod: int | None
-    intelligence_mod: int | None
-    wisdom_mod: int | None
-    charisma_mod: int | None
-
-    strength_sv: int | None
-    dexterity_sv: int | None
-    constitution_sv: int | None
-    intelligence_sv: int | None
-    wisdom_sv: int | None
-    charisma_sv: int | None
-
-    inspiration: int | None
-    proficiency_bonus: int | None
-    perseption: int | None
-
-    acrobatics: int | None
-    animal: int | None
-    arcana: int | None
-    athletics: int | None
-    deception: int | None
-    history: int | None
-    insight: int | None
-    intimidation: int | None
-    investigation: int | None
-    medicine: int | None
-    nature: int | None
-    perception: int | None
-    performance: int | None
-    persuasion: int | None
-    religion: int | None
-    sleight_of_hand: int | None
-    stealth: int | None
-    survival: int | None
-
-    armor_class: int | None
-    initiative: int | None
-    speed: int | None
-
-    hp_max: int | None
-    hp_current: int | None
-    hp_temp: int | None
-
-    hit_dice: str | None
-    hit_dice_total: int | None
-
-    death_saves_successes: int | None
-    death_saves_failures: int | None
-
-    spell_cast_ability: int | None
-    spell_save_dc: int | None
-    spell_attack_bonus: int | None
+    spellcasting_class: str
+    spell_cast_ability: str
+    spell_save_dc: str
+    spell_attack_bonus: str
 
 
 class UpdateForm(BaseModel):
-    pc_id: int
-
-    name: str | None = None
-    race: str | None = None
-    classs: str | None = None
-    spellcasting_class: str | None = None
+    name: str | None
+    classs: str | None = Field(alias="class", default=None)
+    level: str | None = None
     background: str | None = None
+    race: str | None = None
     alignment: str | None = None
+    xp: str | None = None
 
-    age: int | None = None
-    height: int | None = None
-    wight: int | None = None
-    eyes: str | None = None
-    skin: str | None = None
-    hair: str | None = None
+    strength: str | None = None
+    dexterity: str | None = None
+    constitution: str | None = None
+    intelligence: str | None = None
+    wisdom: str | None = None
+    charisma: str | None = None
 
-    stats: UpdateFormStats | None = None
-    spell_slot_total: tuple[int, int, int, int, int, int, int, int, int] | None = None  # fmt: off
-    spell_slot_expended: tuple[int, int, int, int, int, int, int, int, int] | None = None  # fmt: off
+    strength_mod: str | None = None
+    dexterity_mod: str | None = None
+    constitution_mod: str | None = None
+    intelligence_mod: str | None = None
+    wisdom_mod: str | None = None
+    charisma_mod: str | None = None
+
+    strength_sv: str | None = None
+    dexterity_sv: str | None = None
+    constitution_sv: str | None = None
+    intelligence_sv: str | None = None
+    wisdom_sv: str | None = None
+    charisma_sv: str | None = None
+
+    inspiration: str | None = None
+    proficiency_bonus: str | None = None
+    perseption: str | None = None
+
+    acrobatics: str | None = None
+    animal: str | None = None
+    arcana: str | None = None
+    athletics: str | None = None
+    deception: str | None = None
+    history: str | None = None
+    insight: str | None = None
+    intimidation: str | None = None
+    investigation: str | None = None
+    medicine: str | None = None
+    nature: str | None = None
+    perception: str | None = None
+    performance: str | None = None
+    persuasion: str | None = None
+    religion: str | None = None
+    sleight_of_hand: str | None = None
+    stealth: str | None = None
+    survival: str | None = None
+
+    armor_class: str | None = None
+    initiative: str | None = None
+    speed: str | None = None
+
+    hp_max: str | None = None
+    hp_current: str | None = None
+    hp_temp: str | None = None
+
+    hit_dice: str | None = None
+    hit_dice_total: str | None = None
+
+    death_saves_successes: str | None = None
+    death_saves_failures: str | None = None
 
     other_proficiencies_and_languages: list[str] | None = None
     equipment: list[str] | None = None
     features_and_traits: list[str] | None = None
 
-    copper: int | None = None
-    silver: int | None = None
-    emerald: int | None = None
-    gold: int | None = None
-    platinum: int | None = None
+    copper: str | None = None
+    silver: str | None = None
+    emerald: str | None = None
+    gold: str | None = None
+    platinum: str | None = None
 
-    attacks: dict[str, Attack] | None = None
-    spells: dict[str, Spell] | None = None
+    age: str | None = None
+    height: str | None = None
+    wight: str | None = None
+    eyes: str | None = None
+    skin: str | None = None
+    hair: str | None = None
+
+    spellcasting_class: str | None = None
+    spell_cast_ability: str | None = None
+    spell_save_dc: str | None = None
+    spell_attack_bonus: str | None = None

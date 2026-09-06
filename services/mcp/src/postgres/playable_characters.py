@@ -1,6 +1,6 @@
-from typing import Self
-
 from asyncpg import Connection
+
+from models.playable_characters import Attack, PlayableCharacter, Spell, UpdateForm
 
 
 async def insert(self, c: Connection, attacks: list[Attack], spells: list[Spell]):
@@ -25,29 +25,8 @@ async def insert(self, c: Connection, attacks: list[Attack], spells: list[Spell]
             self.copper, self.silver, self.emerald, self.gold, self.platinum,
         )  # fmt: off
 
-        await c.executemany(
-            """
-            INSERT INTO pc_attacks
-            VALUES ($1, $2, $3, $4)
-            """,
-            [
-                (self.pc_id, attack.name, attack.bonus, attack.damage, attack.type)
-                for attack in attacks
-            ],
-        )
 
-        await c.executemany(
-            """
-            INSERT INTO pc_spells
-            VALUES ($1, $2, $3, $4)
-            """,
-            [(self.pc_id, spell.name, spell.level, spell.prepared) for spell in spells],
-        )
-
-
-async def update_by_id(
-    self, c: Connection, attacks: list[Attack], spells: list[Spell]
-) -> str:
+async def update(c: Connection, pc_id: int, form: UpdateForm) -> str:
     async with c.transaction():
         return await c.execute(
             """
@@ -82,28 +61,7 @@ async def update_by_id(
                 platinum = $24,
             WHERE pc_id = $1
             """,
-            self.pc_id,
-            self.name, self.race, self.classs, self.spellcasting_class, self.background, self.alignment,
-            self.age, self.height, self.wight, self.eyes, self.skin, self.hair,
-            self.stats, self.spell_slot_total, self.spell_slot_expended,
-            self.other_proficiencies_and_languages, self.equipment, self.features_and_traits,
-            self.copper, self.silver, self.emerald, self.gold, self.platinum,
-        )  # fmt: off
-
-        await c.executemany(
-            """
-            UPDATE pc_attacks
-            SET
-                name = $2,
-                bonus = $3,
-                damage = $4,
-                type = $5
-            WHERE pc_id = $1 AND name = $2
-            """,
-            [
-                (self.pc_id, attack.name, attack.bonus, attack.damage, attack.type)
-                for attack in attacks
-            ],
+            **form.model_dump(),
         )
 
         await c.executemany(
@@ -119,37 +77,35 @@ async def update_by_id(
         )
 
 
-@classmethod
-async def select_by_id(cls, c: Connection, pc_id: str) -> Self | None:
-    async with c.transaction():
-        pc = cls.model_validate(
-            await c.fetchrow(
-                """
-                SELECT * FROM playable_characters
-                WHERE pc_id = $1
-                """,
-                pc_id,
-            )
+async def select_by_id(cls, c: Connection, pc_id: str) -> PlayableCharacter | None:
+    pc = cls.model_validate(
+        await c.fetchrow(
+            """
+            SELECT * FROM playable_characters
+            WHERE pc_id = $1
+            """,
+            pc_id,
         )
+    )
 
-        for attack in await c.fetch(
-            """
-            SELECT * FROM pc_attacks
-            WHERE pc_id = $1
-            """,
-            pc_id,
-        ):
-            attack = Attack.model_validate(attack)
-            pc.attacks[attack.name] = attack
+    for attack in await c.fetch(
+        """
+        SELECT * FROM pc_attacks
+        WHERE pc_id = $1
+        """,
+        pc_id,
+    ):
+        attack = Attack.model_validate(attack)
+        pc.attacks[attack.name] = attack
 
-        for spell in await c.fetch(
-            """
-            SELECT * FROM pc_spells
-            WHERE pc_id = $1
-            """,
-            pc_id,
-        ):
-            spell = Spell.model_validate(spell)
-            pc.spells[spell.name] = spell
+    for spell in await c.fetch(
+        """
+        SELECT * FROM pc_spells
+        WHERE pc_id = $1
+        """,
+        pc_id,
+    ):
+        spell = Spell.model_validate(spell)
+        pc.spells[spell.name] = spell
 
-        return pc
+    return pc
