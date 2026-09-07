@@ -8,16 +8,17 @@ class Attack(BaseModel):
     type: str
 
 
-class SpellSlot(BaseModel):
-    level: str
-    total: str
-    expended: str
-
-
 class Spell(BaseModel):
     name: str
     level: int
     prepared: bool
+
+
+class SpellSlot(BaseModel):
+    level: str
+    total: str
+    expended: str
+    spells: list[Spell]
 
 
 class PlayableCharacter(BaseModel):
@@ -110,6 +111,28 @@ class PlayableCharacter(BaseModel):
     spell_cast_ability: str
     spell_save_dc: str
     spell_attack_bonus: str
+
+    attacks: list[Attack]
+    spell_slots: list[SpellSlot]
+
+
+class AttackUpdate(BaseModel):
+    name: str | None = None
+    bonus: int | None = None
+    damage: int | None = None
+    type: str | None = None
+
+
+class SpellSlotUpdate(BaseModel):
+    level: str | None = None
+    total: str | None = None
+    expended: str | None = None
+
+
+class SpellUpdate(BaseModel):
+    name: str | None = None
+    level: int | None = None
+    prepared: bool | None = None
 
 
 class UpdateForm(BaseModel):
