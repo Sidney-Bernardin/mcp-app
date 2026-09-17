@@ -1,9 +1,17 @@
 from pydantic import BaseModel
 
 
-class Person(BaseModel):
-    name: str = []
+class Matter(BaseModel):
+    mass: int
 
 
-p = Person()
-print(p)
+class Animal(BaseModel):
+    name: str
+
+
+class Person(Animal, Matter):
+    last_name: str
+
+
+p = Person(name="sidney", last_name="bernardin", mass=10)
+print(p.__class__.__base__)

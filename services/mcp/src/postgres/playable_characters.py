@@ -1,6 +1,6 @@
 from asyncpg import Connection
-
-from models.playable_characters import PlayableCharacter, UpdateForm
+from commands import PlayableCharacterUpdate
+from entities import PlayableCharacter
 from postgres.utils import insert_placeholders, update_placeholders
 
 
@@ -15,7 +15,7 @@ async def insert(c: Connection, pc: PlayableCharacter) -> str:
     )
 
 
-async def update(c: Connection, pc_id: int, update: UpdateForm) -> str:
+async def update(c: Connection, pc_id: int, update: PlayableCharacterUpdate) -> str:
     dump = update.model_dump()
     return await c.execute(
         f"""
@@ -27,8 +27,8 @@ async def update(c: Connection, pc_id: int, update: UpdateForm) -> str:
     )
 
 
-async def select_by_id(cls, c: Connection, pc_id: str) -> PlayableCharacter | None:
-    return cls.model_validate(
+async def select_by_id(c: Connection, pc_id: int) -> PlayableCharacter | None:
+    return PlayableCharacter.model_validate(
         await c.fetchrow(
             """
             SELECT * FROM playable_characters

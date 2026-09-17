@@ -1,6 +1,7 @@
 from asyncpg import Connection
 
-from models.playable_characters import Attack, AttackUpdate
+from entities import Attack
+from commands import AttackUpdate
 
 
 async def insert_rows(c: Connection, pc_id: int, attacks: list[Attack]) -> str:
@@ -34,7 +35,7 @@ async def update_rows(c: Connection, pc_id: int, updates: list[AttackUpdate]) ->
     )
 
 
-async def select_by_pc_id(cls, c: Connection, pc_id: str) -> list[Attack]:
+async def select_by_pc_id(c: Connection, pc_id: int) -> list[Attack]:
     return [
         Attack.model_validate(attack)
         for attack in await c.fetch(

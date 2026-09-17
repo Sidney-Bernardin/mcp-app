@@ -1,6 +1,7 @@
 from asyncpg import Connection
 
-from models.playable_characters import SpellSlot, SpellSlotUpdate
+from commands import SpellSlotUpdate
+from entities import SpellSlot
 
 
 async def insert_rows(c: Connection, pc_id: int, spell_slots: list[SpellSlot]) -> str:
@@ -35,7 +36,7 @@ async def update_rows(c: Connection, pc_id: int, updates: list[SpellSlotUpdate])
     )
 
 
-async def select_by_pc_id(cls, c: Connection, pc_id: str) -> list[SpellSlot]:
+async def select_by_pc_id(c: Connection, pc_id: int) -> list[SpellSlot]:
     return [
         SpellSlot.model_validate(spell_slot)
         for spell_slot in await c.fetch(

@@ -1,7 +1,5 @@
 from typing import Any
 
-from pydantic import BaseModel
-
 
 def insert_placeholders(d: dict[str, Any]) -> str:
     return ", ".join([f"${i + 1}" for i in range(len(d))])

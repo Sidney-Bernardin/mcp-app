@@ -1,0 +1,115 @@
+CREATE TABLE "pc_attacks" (
+	"pcId" serial,
+	"name" text,
+	"bonus" text NOT NULL,
+	"damage" text NOT NULL,
+	"type" text NOT NULL,
+	CONSTRAINT "pc_attacks_pkey" PRIMARY KEY("pcId","name")
+);
+--> statement-breakpoint
+CREATE TABLE "pc_spell_slots" (
+	"pcId" serial,
+	"level" text,
+	"total" text NOT NULL,
+	"expended" text NOT NULL,
+	CONSTRAINT "pc_spell_slots_pkey" PRIMARY KEY("pcId","level")
+);
+--> statement-breakpoint
+CREATE TABLE "pc_spells" (
+	"pcId" serial,
+	"name" text NOT NULL,
+	"level" text,
+	"prepared" boolean NOT NULL,
+	CONSTRAINT "pc_spells_pkey" PRIMARY KEY("pcId","level")
+);
+--> statement-breakpoint
+CREATE TABLE "playable_characters" (
+	"id" serial PRIMARY KEY,
+	"name" text NOT NULL,
+	"class" text NOT NULL,
+	"level" text NOT NULL,
+	"background" text NOT NULL,
+	"race" text NOT NULL,
+	"alignment" text NOT NULL,
+	"xp" text NOT NULL,
+	"age" text NOT NULL,
+	"height" text NOT NULL,
+	"wight" text NOT NULL,
+	"eyes" text NOT NULL,
+	"skin" text NOT NULL,
+	"hair" text NOT NULL,
+	"strength" text NOT NULL,
+	"dexterity" text NOT NULL,
+	"constitution" text NOT NULL,
+	"intelligence" text NOT NULL,
+	"wisdom" text NOT NULL,
+	"charisma" text NOT NULL,
+	"strengthMod" text NOT NULL,
+	"dexterityMod" text NOT NULL,
+	"constitutionMod" text NOT NULL,
+	"intelligenceMod" text NOT NULL,
+	"wisdomMod" text NOT NULL,
+	"charismaMod" text NOT NULL,
+	"strengthSv" text NOT NULL,
+	"dexteritySv" text NOT NULL,
+	"constitutionSv" text NOT NULL,
+	"intelligenceSv" text NOT NULL,
+	"wisdomSv" text NOT NULL,
+	"charismaSv" text NOT NULL,
+	"inspiration" text NOT NULL,
+	"proficiencyBonus" text NOT NULL,
+	"perseption" text NOT NULL,
+	"acrobatics" text NOT NULL,
+	"animal" text NOT NULL,
+	"arcana" text NOT NULL,
+	"athletics" text NOT NULL,
+	"deception" text NOT NULL,
+	"history" text NOT NULL,
+	"insight" text NOT NULL,
+	"intimidation" text NOT NULL,
+	"investigation" text NOT NULL,
+	"medicine" text NOT NULL,
+	"nature" text NOT NULL,
+	"perception" text NOT NULL,
+	"performance" text NOT NULL,
+	"persuasion" text NOT NULL,
+	"religion" text NOT NULL,
+	"sleightOfHand" text NOT NULL,
+	"stealth" text NOT NULL,
+	"survival" text NOT NULL,
+	"armorClass" text NOT NULL,
+	"initiative" text NOT NULL,
+	"speed" text NOT NULL,
+	"hpMax" text NOT NULL,
+	"hpCurrent" text NOT NULL,
+	"hpTemp" text NOT NULL,
+	"hitDice" text NOT NULL,
+	"hitDiceTotal" text NOT NULL,
+	"deathSavesSuccesses" text NOT NULL,
+	"deathSavesFailures" text NOT NULL,
+	"spellCastAbility" text NOT NULL,
+	"spellSaveDc" text NOT NULL,
+	"spellAttackBonus" text NOT NULL,
+	"spellSlotTotal" integer[] DEFAULT ARRAY[0, 0, 0, 0, 0, 0, 0, 0, 0]::integer[],
+	"spellSlotExpended" integer[] DEFAULT ARRAY[0, 0, 0, 0, 0, 0, 0, 0, 0]::integer[],
+	"otherProficienciesAndLanguages" text[] NOT NULL,
+	"equipment" text[] NOT NULL,
+	"featuresAndTraits" text[] NOT NULL,
+	"copper" text NOT NULL,
+	"silver" text NOT NULL,
+	"emerald" text NOT NULL,
+	"gold" text NOT NULL,
+	"platinum" text NOT NULL,
+	CONSTRAINT "spell_slot_total_check" CHECK (cardinality("spellSlotTotal") = 9)
+);
+--> statement-breakpoint
+CREATE TABLE "users" (
+	"id" serial PRIMARY KEY,
+	"username" varchar(255) NOT NULL,
+	"passwordHash" bytea NOT NULL,
+	"passwordSalt" bytea NOT NULL,
+	"createdAt" timestamp DEFAULT now() NOT NULL
+);
+--> statement-breakpoint
+ALTER TABLE "pc_attacks" ADD CONSTRAINT "pc_attacks_pcId_playable_characters_id_fkey" FOREIGN KEY ("pcId") REFERENCES "playable_characters"("id");--> statement-breakpoint
+ALTER TABLE "pc_spells" ADD CONSTRAINT "pc_spells_pcId_level_pc_spell_slots_pcId_level_fkey" FOREIGN KEY ("pcId","level") REFERENCES "pc_spell_slots"("pcId","level");
