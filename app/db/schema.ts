@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm"
 import { defineRelations } from "drizzle-orm"
 import {
-  pgTable, primaryKey, check, foreignKey, unique,
+  pgTable, primaryKey, check, foreignKey,
   bytea, text, serial, varchar, integer, boolean, timestamp,
 } from "drizzle-orm/pg-core"
 
