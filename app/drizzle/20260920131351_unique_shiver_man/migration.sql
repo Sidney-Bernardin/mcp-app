@@ -100,7 +100,8 @@ CREATE TABLE "playable_characters" (
 	"emerald" text NOT NULL,
 	"gold" text NOT NULL,
 	"platinum" text NOT NULL,
-	CONSTRAINT "spell_slot_total_check" CHECK (cardinality("spellSlotTotal") = 9)
+	CONSTRAINT "spell_slot_total_check" CHECK (cardinality("spellSlotTotal") = 9),
+	CONSTRAINT "spell_slot_expended_check" CHECK (cardinality("spellSlotExpended") = 9)
 );
 --> statement-breakpoint
 CREATE TABLE "users" (
@@ -111,5 +112,7 @@ CREATE TABLE "users" (
 	"createdAt" timestamp DEFAULT now() NOT NULL
 );
 --> statement-breakpoint
+CREATE INDEX "username" ON "users" ("username");--> statement-breakpoint
 ALTER TABLE "pc_attacks" ADD CONSTRAINT "pc_attacks_pcId_playable_characters_id_fkey" FOREIGN KEY ("pcId") REFERENCES "playable_characters"("id");--> statement-breakpoint
+ALTER TABLE "pc_spell_slots" ADD CONSTRAINT "pc_spell_slots_pcId_playable_characters_id_fkey" FOREIGN KEY ("pcId") REFERENCES "playable_characters"("id");--> statement-breakpoint
 ALTER TABLE "pc_spells" ADD CONSTRAINT "pc_spells_pcId_level_pc_spell_slots_pcId_level_fkey" FOREIGN KEY ("pcId","level") REFERENCES "pc_spell_slots"("pcId","level");

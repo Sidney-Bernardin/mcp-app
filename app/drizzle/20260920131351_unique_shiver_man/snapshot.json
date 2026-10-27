@@ -1,7 +1,7 @@
 {
   "version": "8",
   "dialect": "postgres",
-  "id": "96601804-70cc-462d-ae4b-4a153093fa2a",
+  "id": "49c93139-5cb6-44e4-881b-e0af5d198044",
   "prevIds": [
     "00000000-0000-0000-0000-000000000000"
   ],
@@ -1259,6 +1259,27 @@
       "table": "users"
     },
     {
+      "nameExplicit": true,
+      "columns": [
+        {
+          "value": "username",
+          "isExpression": false,
+          "asc": true,
+          "nullsFirst": false,
+          "opclass": null
+        }
+      ],
+      "isUnique": false,
+      "where": null,
+      "with": "",
+      "method": "btree",
+      "concurrently": false,
+      "name": "username",
+      "entityType": "indexes",
+      "schema": "public",
+      "table": "users"
+    },
+    {
       "nameExplicit": false,
       "columns": [
         "pcId"
@@ -1274,6 +1295,23 @@
       "entityType": "fks",
       "schema": "public",
       "table": "pc_attacks"
+    },
+    {
+      "nameExplicit": false,
+      "columns": [
+        "pcId"
+      ],
+      "schemaTo": "public",
+      "tableTo": "playable_characters",
+      "columnsTo": [
+        "id"
+      ],
+      "onUpdate": "NO ACTION",
+      "onDelete": "NO ACTION",
+      "name": "pc_spell_slots_pcId_playable_characters_id_fkey",
+      "entityType": "fks",
+      "schema": "public",
+      "table": "pc_spell_slots"
     },
     {
       "nameExplicit": false,
@@ -1350,6 +1388,13 @@
     {
       "value": "cardinality(\"spellSlotTotal\") = 9",
       "name": "spell_slot_total_check",
+      "entityType": "checks",
+      "schema": "public",
+      "table": "playable_characters"
+    },
+    {
+      "value": "cardinality(\"spellSlotExpended\") = 9",
+      "name": "spell_slot_expended_check",
       "entityType": "checks",
       "schema": "public",
       "table": "playable_characters"

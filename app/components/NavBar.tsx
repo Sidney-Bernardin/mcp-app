@@ -1,8 +1,7 @@
-import Link from "next/link";
+import NavBarLinks from "@/components/NavBarLinks";
+import { Suspense } from "react";
 
-export default async function NavBar() {
-  const user = false
-
+export default function NavBar() {
   return (
     <nav
       className="
@@ -10,15 +9,10 @@ export default async function NavBar() {
         *:flex-1 *:flex *:gap-2 *:justify-center
       "
     >
-      {user && <div>username</div>}
       <h1>Rollbringer</h1>
-      <ul>
-        <li><Link href="/">home</Link></li>
-        {
-          !user &&
-          <li><Link href="/signup">login</Link></li>
-        }
-      </ul>
+      <Suspense fallback={<p>buttons...</p>}>
+        <NavBarLinks />
+      </Suspense>
     </nav>
   )
 }

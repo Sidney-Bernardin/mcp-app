@@ -3,16 +3,22 @@ import { defineRelations } from "drizzle-orm"
 import {
   pgTable, primaryKey, check, foreignKey,
   bytea, text, serial, varchar, integer, boolean, timestamp,
+  index,
 } from "drizzle-orm/pg-core"
 
 
 export const users = pgTable("users", {
   id: serial().primaryKey(),
-  username: varchar({ length: 255 }).notNull(),
+  username: varchar({ length: 255 }).notNull().unique(),
   passwordHash: bytea().notNull(),
   passwordSalt: bytea().notNull(),
   createdAt: timestamp().defaultNow().notNull(),
-})
+}, (table) => ([
+  index("username").on(table.username)
+]))
+
+export type FullUser = typeof users.$inferSelect
+export type OptionalUser = Partial<FullUser>
 
 export const playableCharacters = pgTable("playable_characters", {
   id: serial().primaryKey(),
@@ -107,7 +113,8 @@ export const playableCharacters = pgTable("playable_characters", {
   gold: text().notNull(),
   platinum: text().notNull(),
 }, (table) => [
-  check("spell_slot_total_check", sql`cardinality(${table.spellSlotTotal}) = 9`)
+  check("spell_slot_total_check", sql`cardinality(${table.spellSlotTotal}) = 9`),
+  check("spell_slot_expended_check", sql`cardinality(${table.spellSlotExpended}) = 9`),
 ])
 
 export const pcAttacks = pgTable("pc_attacks", {
@@ -118,11 +125,11 @@ export const pcAttacks = pgTable("pc_attacks", {
   damage: text().notNull(),
   type: text().notNull(),
 }, (table) => [
-  primaryKey({ columns: [table.pcId, table.name] })
+  primaryKey({ columns: [table.pcId, table.name] }),
 ])
 
 export const pcSpellSlots = pgTable("pc_spell_slots", {
-  pcId: serial().notNull(),
+  pcId: serial().notNull().references(() => playableCharacters.id),
   level: text().notNull(),
 
   total: text().notNull(),
@@ -145,7 +152,7 @@ export const pcSpells = pgTable("pc_spells", {
   }),
 ])
 
-export const relations = defineRelations({ playableCharacters, pcAttacks, pcSpellSlots, pcSpells }, (r) => ({
+export const relations = defineRelations({ users, playableCharacters, pcAttacks, pcSpellSlots, pcSpells }, (r) => ({
   playableCharacters: {
     pcAttacks: r.many.pcAttacks({
       from: r.playableCharacters.id,
