@@ -2,10 +2,11 @@
 
 import { useActionState } from "react"
 import Form from "next/form"
-
-import { signup } from "@/commands/auth"
-import { FormError, SignupForm as SignupFormType } from "@/forms/auth"
 import { useSearchParams, useRouter } from "next/navigation"
+
+import { signup } from "@/lib/requests/auth"
+import { SignupForm as SignupFormType } from "@/lib/commands"
+import { FormError } from "@/lib/views"
 import { useAuth } from "@/context/AuthContext"
 
 

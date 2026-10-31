@@ -3,8 +3,9 @@
 import { useActionState } from "react"
 import Form from "next/form"
 
-import { signin } from "@/commands/auth"
-import { FormError, SigninForm as SigninFormType } from "@/forms/auth"
+import { signin } from "@/lib/requests/auth"
+import { SigninForm as SigninFormType } from "@/lib/commands"
+import { FormError } from "@/lib/views"
 import { useSearchParams, useRouter } from "next/navigation"
 import { useAuth } from "@/context/AuthContext"
 

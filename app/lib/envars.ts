@@ -10,8 +10,8 @@ const envarsSchema = z.object({
   ACCESS_TOKEN_EXPIRATION_SECONDS: z.coerce.number(),
 })
 
-const envars = envarsSchema.safeParse(process.env)
-if (!envars.success)
-  throw Error(envars.error.message)
+const envars_ = envarsSchema.safeParse(process.env)
+if (!envars_.success)
+  throw Error(envars_.error.message)
 
-export default envars.data
+export const envars = envars_.data

@@ -2,7 +2,7 @@
 
 import { createContext, Dispatch, ReactNode, SetStateAction, use, useCallback, useEffect, useState } from "react";
 import * as JWT from "jsonwebtoken"
-import { refresh } from "@/commands/auth";
+import { refresh } from "@/lib/requests/auth";
 
 interface AuthContextType {
   loggedIn: boolean
@@ -21,7 +21,6 @@ export function AuthProvider(props: { children: ReactNode }) {
       const exp = JWT.decode(accessToken, { json: true })?.exp
       if (exp && exp * 1000 > Date.now()) // Multiply by 1000 to convert the JWT's seconds into miliseconds.
         return doReq(accessToken)
-      console.log("expired")
     }
 
     const newAccessToken = await refresh()

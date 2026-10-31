@@ -1,9 +1,5 @@
 import * as z from "zod"
 
-export type FormError<T> = {
-  fieldErrors?: z.core.$ZodFlattenedError<T>["fieldErrors"]
-  formErrors?: string[]
-}
 
 export const signupFormSchema = z.object({
   username: z.string()

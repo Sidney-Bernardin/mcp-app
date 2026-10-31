@@ -1,3 +1,5 @@
+"server only"
+
 import { sql } from "drizzle-orm"
 import { defineRelations } from "drizzle-orm"
 import {
@@ -5,6 +7,12 @@ import {
   bytea, text, serial, varchar, integer, boolean, timestamp,
   index,
 } from "drizzle-orm/pg-core"
+import { NodePgDatabase, NodePgTransaction } from "drizzle-orm/node-postgres"
+
+
+export type DB =
+  | NodePgDatabase<typeof relations>
+  | NodePgTransaction<typeof relations>
 
 
 export const users = pgTable("users", {
@@ -17,8 +25,6 @@ export const users = pgTable("users", {
   index("username").on(table.username)
 ]))
 
-export type FullUser = typeof users.$inferSelect
-export type OptionalUser = Partial<FullUser>
 
 export const playableCharacters = pgTable("playable_characters", {
   id: serial().primaryKey(),
@@ -117,6 +123,7 @@ export const playableCharacters = pgTable("playable_characters", {
   check("spell_slot_expended_check", sql`cardinality(${table.spellSlotExpended}) = 9`),
 ])
 
+
 export const pcAttacks = pgTable("pc_attacks", {
   pcId: serial().references(() => playableCharacters.id),
   name: text().notNull(),
@@ -128,6 +135,7 @@ export const pcAttacks = pgTable("pc_attacks", {
   primaryKey({ columns: [table.pcId, table.name] }),
 ])
 
+
 export const pcSpellSlots = pgTable("pc_spell_slots", {
   pcId: serial().notNull().references(() => playableCharacters.id),
   level: text().notNull(),
@@ -137,6 +145,7 @@ export const pcSpellSlots = pgTable("pc_spell_slots", {
 }, (table) => [
   primaryKey({ columns: [table.pcId, table.level] }),
 ])
+
 
 export const pcSpells = pgTable("pc_spells", {
   pcId: serial(),
@@ -151,6 +160,7 @@ export const pcSpells = pgTable("pc_spells", {
     foreignColumns: [pcSpellSlots.pcId, pcSpellSlots.level],
   }),
 ])
+
 
 export const relations = defineRelations({ users, playableCharacters, pcAttacks, pcSpellSlots, pcSpells }, (r) => ({
   playableCharacters: {
