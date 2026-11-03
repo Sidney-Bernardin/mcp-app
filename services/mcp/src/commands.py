@@ -3,17 +3,16 @@ import entities
 from pydantic import BaseModel, Field
 
 
+class PlayableCharacterCreation(entities.PlayableCharacterBody):
+    attacks: list[entities.Attack]
+    spell_slots: list[aggregates.SpellSlot]
+
+
 class AttackUpdate(BaseModel):
     name: str | None = None
     bonus: int | None = None
     damage: int | None = None
     type: str | None = None
-
-
-class SpellSlotUpdate(BaseModel):
-    level: str | None = None
-    total: str | None = None
-    expended: str | None = None
 
 
 class SpellUpdate(BaseModel):
@@ -22,9 +21,12 @@ class SpellUpdate(BaseModel):
     prepared: bool | None = None
 
 
-class PlayableCharacterCreation(entities.PlayableCharacterBody):
-    attacks: list[entities.Attack]
-    spell_slots: list[aggregates.SpellSlot]
+class SpellSlotUpdate(BaseModel):
+    level: str | None = None
+    total: str | None = None
+    expended: str | None = None
+
+    spells: list[SpellUpdate]
 
 
 class PlayableCharacterUpdate(BaseModel):
@@ -115,3 +117,6 @@ class PlayableCharacterUpdate(BaseModel):
     spell_cast_ability: str | None = None
     spell_save_dc: str | None = None
     spell_attack_bonus: str | None = None
+
+    attacks: list[AttackUpdate]
+    spell_slots: list[SpellSlotUpdate]
