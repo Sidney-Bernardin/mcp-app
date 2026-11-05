@@ -4,7 +4,6 @@ from typing import cast
 
 import aggregates
 import asyncpg
-import commands
 import config
 from mcp.server import MCPServer
 from mcp.server.mcpserver import Context

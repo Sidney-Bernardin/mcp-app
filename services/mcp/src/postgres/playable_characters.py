@@ -2,24 +2,26 @@ from aggregates import PlayableCharacter, SpellSlot
 from asyncpg import Connection
 from commands import PlayableCharacterCreation, PlayableCharacterUpdate
 from entities import Attack, Spell
-from postgres.utils import insert_placeholders, update_placeholders
+from postgres.utils import insert_fields, insert_placeholders, update_placeholders
 
 
 async def insert(c: Connection, pc: PlayableCharacterCreation) -> None:
-    dump = pc.model_dump(exclude={"attacks", "spell_slots"})
+    dump = pc.model_dump(exclude={"attacks", "spell_slots"}, by_alias=True)
     pc_id = await c.fetchval(
         f"""
         INSERT INTO playable_characters
+        ({insert_fields(dump)})
         VALUES ({insert_placeholders(dump)})
         RETURNING id
         """,
-        **dump,
+        # **dump,
+        *dump.values(),
     )
 
     await c.executemany(
         """
         INSERT INTO pc_attacks
-        VALUES ($1, $2, $3, $4)
+        VALUES ($1, $2, $3, $4, $5)
         """,
         [
             (pc_id, attack.name, attack.bonus, attack.damage, attack.type)
@@ -30,7 +32,7 @@ async def insert(c: Connection, pc: PlayableCharacterCreation) -> None:
     await c.executemany(
         """
         INSERT INTO pc_spell_slots
-        VALUES ($1, $2, $3)
+        VALUES ($1, $2, $3, $4)
         """,
         [
             (

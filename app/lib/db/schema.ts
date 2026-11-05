@@ -6,6 +6,7 @@ import {
   pgTable, primaryKey, check, foreignKey,
   bytea, text, serial, varchar, integer, boolean, timestamp,
   index,
+  bigint,
 } from "drizzle-orm/pg-core"
 import { NodePgDatabase, NodePgTransaction } from "drizzle-orm/node-postgres"
 
@@ -16,22 +17,22 @@ export type DB =
 
 
 export const users = pgTable("users", {
-  id: serial().primaryKey(),
+  id: bigint({ mode: "bigint" }).generatedAlwaysAsIdentity().primaryKey(),
   username: varchar({ length: 255 }).notNull().unique(),
-  passwordHash: bytea().notNull(),
-  passwordSalt: bytea().notNull(),
-  createdAt: timestamp().defaultNow().notNull(),
+  password_hash: bytea().notNull(),
+  password_halt: bytea().notNull(),
+  created_at: timestamp().defaultNow().notNull(),
 }, (table) => ([
   index("username").on(table.username)
 ]))
 
 
 export const playableCharacters = pgTable("playable_characters", {
-  id: serial().primaryKey(),
+  id: bigint({ mode: "bigint" }).generatedAlwaysAsIdentity().primaryKey(),
 
   name: text().notNull(),
   class: text().notNull(),
-  level: text().notNull(),
+  level: integer().notNull(),
   background: text().notNull(),
   race: text().notNull(),
   alignment: text().notNull(),
@@ -51,22 +52,22 @@ export const playableCharacters = pgTable("playable_characters", {
   wisdom: text().notNull(),
   charisma: text().notNull(),
 
-  strengthMod: text().notNull(),
-  dexterityMod: text().notNull(),
-  constitutionMod: text().notNull(),
-  intelligenceMod: text().notNull(),
-  wisdomMod: text().notNull(),
-  charismaMod: text().notNull(),
+  strength_mod: text().notNull(),
+  dexterity_mod: text().notNull(),
+  constitution_mod: text().notNull(),
+  intelligence_mod: text().notNull(),
+  wisdom_mod: text().notNull(),
+  charisma_mod: text().notNull(),
 
-  strengthSv: text().notNull(),
-  dexteritySv: text().notNull(),
-  constitutionSv: text().notNull(),
-  intelligenceSv: text().notNull(),
-  wisdomSv: text().notNull(),
-  charismaSv: text().notNull(),
+  strength_sv: text().notNull(),
+  dexterity_sv: text().notNull(),
+  constitution_sv: text().notNull(),
+  intelligence_sv: text().notNull(),
+  wisdom_sv: text().notNull(),
+  charisma_sv: text().notNull(),
 
   inspiration: text().notNull(),
-  proficiencyBonus: text().notNull(),
+  proficiency_bonus: text().notNull(),
   perseption: text().notNull(),
 
   acrobatics: text().notNull(),
@@ -84,34 +85,35 @@ export const playableCharacters = pgTable("playable_characters", {
   performance: text().notNull(),
   persuasion: text().notNull(),
   religion: text().notNull(),
-  sleightOfHand: text().notNull(),
+  sleight_of_hand: text().notNull(),
   stealth: text().notNull(),
   survival: text().notNull(),
 
-  armorClass: text().notNull(),
+  armor_class: text().notNull(),
   initiative: text().notNull(),
   speed: text().notNull(),
 
-  hpMax: text().notNull(),
-  hpCurrent: text().notNull(),
+  hp_max: text().notNull(),
+  hp_current: text().notNull(),
 
-  hpTemp: text().notNull(),
-  hitDice: text().notNull(),
-  hitDiceTotal: text().notNull(),
+  hp_temp: text().notNull(),
+  hit_dice: text().notNull(),
+  hit_dice_total: text().notNull(),
 
-  deathSavesSuccesses: text().notNull(),
-  deathSavesFailures: text().notNull(),
+  death_saves_successes: text().notNull(),
+  death_saves_failures: text().notNull(),
 
-  spellCastAbility: text().notNull(),
-  spellSaveDc: text().notNull(),
-  spellAttackBonus: text().notNull(),
+  spell_cast_class: text().notNull(),
+  spell_cast_ability: text().notNull(),
+  spell_save_dc: text().notNull(),
+  spell_attack_bonus: text().notNull(),
 
-  spellSlotTotal: integer().array().default(sql`ARRAY[0, 0, 0, 0, 0, 0, 0, 0, 0]`),
-  spellSlotExpended: integer().array().default(sql`ARRAY[0, 0, 0, 0, 0, 0, 0, 0, 0]`),
+  spell_slot_total: integer().array().default(sql`ARRAY[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`),
+  spell_slot_expended: integer().array().default(sql`ARRAY[0, 0, 0, 0, 0, 0, 0, 0, 0, 0]`),
 
-  otherProficienciesAndLanguages: text().array().notNull(),
+  other_proficiencies_and_languages: text().array().notNull(),
   equipment: text().array().notNull(),
-  featuresAndTraits: text().array().notNull(),
+  features_and_traits: text().array().notNull(),
 
   copper: text().notNull(),
   silver: text().notNull(),
@@ -119,45 +121,45 @@ export const playableCharacters = pgTable("playable_characters", {
   gold: text().notNull(),
   platinum: text().notNull(),
 }, (table) => [
-  check("spell_slot_total_check", sql`cardinality(${table.spellSlotTotal}) = 9`),
-  check("spell_slot_expended_check", sql`cardinality(${table.spellSlotExpended}) = 9`),
+  check("spell_slot_total_check", sql`cardinality(${table.spell_slot_total}) = 10`),
+  check("spell_slot_expended_check", sql`cardinality(${table.spell_slot_expended}) = 10`),
 ])
 
 
 export const pcAttacks = pgTable("pc_attacks", {
-  pcId: serial().references(() => playableCharacters.id),
+  pc_id: bigint({ mode: "bigint" }).references(() => playableCharacters.id),
   name: text().notNull(),
 
   bonus: text().notNull(),
   damage: text().notNull(),
   type: text().notNull(),
 }, (table) => [
-  primaryKey({ columns: [table.pcId, table.name] }),
+  primaryKey({ columns: [table.pc_id, table.name] }),
 ])
 
 
 export const pcSpellSlots = pgTable("pc_spell_slots", {
-  pcId: serial().notNull().references(() => playableCharacters.id),
-  level: text().notNull(),
+  pc_id: bigint({ mode: "bigint" }).notNull().references(() => playableCharacters.id),
+  level: integer().notNull(),
 
   total: text().notNull(),
   expended: text().notNull(),
 }, (table) => [
-  primaryKey({ columns: [table.pcId, table.level] }),
+  primaryKey({ columns: [table.pc_id, table.level] }),
 ])
 
 
 export const pcSpells = pgTable("pc_spells", {
-  pcId: serial(),
+  pc_id: bigint({ mode: "bigint" }),
   name: text().notNull(),
 
-  level: text(),
+  level: integer().notNull(),
   prepared: boolean().notNull(),
 }, (table) => [
-  primaryKey({ columns: [table.pcId, table.level] }),
+  primaryKey({ columns: [table.pc_id, table.level] }),
   foreignKey({
-    columns: [table.pcId, table.level],
-    foreignColumns: [pcSpellSlots.pcId, pcSpellSlots.level],
+    columns: [table.pc_id, table.level],
+    foreignColumns: [pcSpellSlots.pc_id, pcSpellSlots.level],
   }),
 ])
 
@@ -166,17 +168,17 @@ export const relations = defineRelations({ users, playableCharacters, pcAttacks,
   playableCharacters: {
     pcAttacks: r.many.pcAttacks({
       from: r.playableCharacters.id,
-      to: r.pcAttacks.pcId,
+      to: r.pcAttacks.pc_id,
     }),
     pcSpellSlots: r.many.pcSpellSlots({
       from: r.playableCharacters.id,
-      to: r.pcSpellSlots.pcId,
+      to: r.pcSpellSlots.pc_id,
     })
   },
   pcSpellSlots: {
     pcSpells: r.many.pcSpells({
-      from: [r.pcSpellSlots.pcId, r.pcSpellSlots.level],
-      to: [r.pcSpells.pcId, r.pcSpells.level],
+      from: [r.pcSpellSlots.pc_id, r.pcSpellSlots.level],
+      to: [r.pcSpells.pc_id, r.pcSpells.level],
     })
   }
 }))

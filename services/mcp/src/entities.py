@@ -3,8 +3,8 @@ from pydantic import BaseModel, Field
 
 class Attack(BaseModel):
     name: str
-    bonus: int
-    damage: int
+    bonus: str
+    damage: str
     type: str
 
 
@@ -15,7 +15,7 @@ class Spell(BaseModel):
 
 
 class SpellSlot(BaseModel):
-    level: str
+    level: int
     total: str
     expended: str
 
@@ -27,7 +27,7 @@ class PlayableCharacterID(BaseModel):
 class PlayableCharacterBody(BaseModel):
     name: str
     classs: str = Field(alias="class")
-    level: str
+    level: int
     background: str
     race: str
     alignment: str
@@ -108,7 +108,7 @@ class PlayableCharacterBody(BaseModel):
     skin: str
     hair: str
 
-    spellcasting_class: str
+    spell_cast_class: str
     spell_cast_ability: str
     spell_save_dc: str
     spell_attack_bonus: str
