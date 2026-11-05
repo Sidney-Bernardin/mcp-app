@@ -2,7 +2,13 @@ from aggregates import PlayableCharacter, SpellSlot
 from asyncpg import Connection
 from commands import PlayableCharacterCreation, PlayableCharacterUpdate
 from entities import Attack, Spell
-from postgres.utils import insert_fields, insert_placeholders, update_placeholders
+from postgres.utils import (
+    fetch,
+    fetchrow,
+    insert_fields,
+    insert_placeholders,
+    update_placeholders,
+)
 
 
 async def insert(c: Connection, pc: PlayableCharacterCreation) -> None:
@@ -14,7 +20,6 @@ async def insert(c: Connection, pc: PlayableCharacterCreation) -> None:
         VALUES ({insert_placeholders(dump)})
         RETURNING id
         """,
-        # **dump,
         *dump.values(),
     )
 
@@ -60,51 +65,48 @@ async def insert(c: Connection, pc: PlayableCharacterCreation) -> None:
 
 async def select_by_id(c: Connection, pc_id: int) -> PlayableCharacter | None:
 
-    pc = PlayableCharacter.model_validate(
-        await c.fetchrow(
-            """
-            SELECT * FROM playable_characters
-            WHERE pc_id = $1
-            """,
-            id,
-        )
+    pc = await fetchrow(
+        c,
+        PlayableCharacter,
+        """
+        SELECT * FROM playable_characters
+        WHERE id = $1
+        """,
+        pc_id,
     )
 
     if not pc:
         return None
 
-    pc.attacks = [
-        Attack.model_validate(attack)
-        for attack in await c.fetch(
-            """
-            SELECT * FROM pc_spells
-            WHERE pc_id = $1
-            """,
-            id,
-        )
-    ]
+    pc.attacks = await fetch(
+        c,
+        Attack,
+        """
+        SELECT * FROM pc_attacks
+        WHERE pc_id = $1
+        """,
+        pc_id,
+    )
 
-    pc.spell_slots = [
-        SpellSlot.model_validate(spell_slot)
-        for spell_slot in await c.fetch(
-            """
-            SELECT * FROM pc_spell_slots
-            WHERE pc_id = $1
-            """,
-            id,
-        )
-    ]
+    pc.spell_slots = await fetch(
+        c,
+        SpellSlot,
+        """
+        SELECT * FROM pc_spell_slots
+        WHERE pc_id = $1
+        """,
+        pc_id,
+    )
 
-    spells = [
-        Spell.model_validate(spell)
-        for spell in await c.fetch(
-            """
-            SELECT * FROM pc_spells
-            WHERE pc_id = $1
-            """,
-            id,
-        )
-    ]
+    spells = await fetch(
+        c,
+        Spell,
+        """
+        SELECT * FROM pc_spells
+        WHERE pc_id = $1
+        """,
+        pc_id,
+    )
 
     for spell in spells:
         pc.spell_slots[spell.level].spells.append(spell)
