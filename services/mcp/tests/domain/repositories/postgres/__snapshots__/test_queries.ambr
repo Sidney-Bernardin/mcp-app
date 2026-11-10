@@ -1,0 +1,191 @@
+# serializer version: 1
+# name: test_reads
+  list([
+    PlayableCharacter(name='', class_='', level=0, background='', race='', alignment='', xp='', strength='', dexterity='', constitution='', intelligence='', wisdom='', charisma='', strength_mod='', dexterity_mod='', constitution_mod='', intelligence_mod='', wisdom_mod='', charisma_mod='', strength_sv='', dexterity_sv='', constitution_sv='', intelligence_sv='', wisdom_sv='', charisma_sv='', inspiration='', proficiency_bonus='', perseption='', acrobatics='', animal='', arcana='', athletics='', deception='', history='', insight='', intimidation='', investigation='', medicine='', nature='', perception='', performance='', persuasion='', religion='', sleight_of_hand='', stealth='', survival='', armor_class='', initiative='', speed='', hp_max='', hp_current='', hp_temp='', hit_dice='', hit_dice_total='', death_saves_successes='', death_saves_failures='', other_proficiencies_and_languages=[], equipment=[], features_and_traits=[], copper='', silver='', emerald='', gold='', platinum='', age='', height='', wight='', eyes='', skin='', hair='', spell_cast_class='', spell_cast_ability='', spell_save_dc='', spell_attack_bonus='', id=1),
+  ])
+# ---
+# name: test_reads.1
+  list([
+  ])
+# ---
+# name: test_reads.2
+  list([
+    Attack(name='', bonus='', damage='', type='', pc_id=1),
+  ])
+# ---
+# name: test_reads.3
+  list([
+  ])
+# ---
+# name: test_reads.4
+  list([
+    SpellSlot(level=0, total='0', expended='0', pc_id=1),
+  ])
+# ---
+# name: test_reads.5
+  list([
+  ])
+# ---
+# name: test_reads.6
+  list([
+    Spell(name='', level=0, prepared=False, pc_id=1),
+  ])
+# ---
+# name: test_reads.7
+  list([
+  ])
+# ---
+# name: test_writes
+  list([
+    list([
+      <Record id=1 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+      <Record id=2 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+    ]),
+    list([
+      <Record pc_id=1 name='' bonus='' damage='' type=''>,
+    ]),
+    list([
+      <Record pc_id=1 level=0 total='0' expended='0'>,
+    ]),
+    list([
+      <Record pc_id=1 name='' level=0 prepared=False>,
+    ]),
+  ])
+# ---
+# name: test_writes.1
+  list([
+    list([
+      <Record id=1 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+      <Record id=2 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+    ]),
+    list([
+      <Record pc_id=1 name='' bonus='' damage='' type=''>,
+      <Record pc_id=2 name='' bonus='' damage='' type=''>,
+    ]),
+    list([
+      <Record pc_id=1 level=0 total='0' expended='0'>,
+    ]),
+    list([
+      <Record pc_id=1 name='' level=0 prepared=False>,
+    ]),
+  ])
+# ---
+# name: test_writes.2
+  list([
+    list([
+      <Record id=1 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+      <Record id=2 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+    ]),
+    list([
+      <Record pc_id=1 name='' bonus='' damage='' type=''>,
+      <Record pc_id=2 name='' bonus='' damage='' type=''>,
+    ]),
+    list([
+      <Record pc_id=1 level=0 total='0' expended='0'>,
+      <Record pc_id=2 level=0 total='' expended=''>,
+    ]),
+    list([
+      <Record pc_id=1 name='' level=0 prepared=False>,
+    ]),
+  ])
+# ---
+# name: test_writes.3
+  list([
+    list([
+      <Record id=1 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+      <Record id=2 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+    ]),
+    list([
+      <Record pc_id=1 name='' bonus='' damage='' type=''>,
+      <Record pc_id=2 name='' bonus='' damage='' type=''>,
+    ]),
+    list([
+      <Record pc_id=1 level=0 total='0' expended='0'>,
+      <Record pc_id=2 level=0 total='' expended=''>,
+    ]),
+    list([
+      <Record pc_id=1 name='' level=0 prepared=False>,
+      <Record pc_id=2 name='' level=0 prepared=False>,
+    ]),
+  ])
+# ---
+# name: test_writes.4
+  list([
+    list([
+      <Record id=2 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+      <Record id=1 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+    ]),
+    list([
+      <Record pc_id=1 name='' bonus='' damage='' type=''>,
+      <Record pc_id=2 name='' bonus='' damage='' type=''>,
+    ]),
+    list([
+      <Record pc_id=1 level=0 total='0' expended='0'>,
+      <Record pc_id=2 level=0 total='' expended=''>,
+    ]),
+    list([
+      <Record pc_id=1 name='' level=0 prepared=False>,
+      <Record pc_id=2 name='' level=0 prepared=False>,
+    ]),
+  ])
+# ---
+# name: test_writes.5
+  list([
+    list([
+      <Record id=2 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+      <Record id=1 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+    ]),
+    list([
+      <Record pc_id=2 name='' bonus='' damage='' type=''>,
+      <Record pc_id=1 name='' bonus='' damage='' type=''>,
+    ]),
+    list([
+      <Record pc_id=1 level=0 total='0' expended='0'>,
+      <Record pc_id=2 level=0 total='' expended=''>,
+    ]),
+    list([
+      <Record pc_id=1 name='' level=0 prepared=False>,
+      <Record pc_id=2 name='' level=0 prepared=False>,
+    ]),
+  ])
+# ---
+# name: test_writes.6
+  list([
+    list([
+      <Record id=2 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+      <Record id=1 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+    ]),
+    list([
+      <Record pc_id=2 name='' bonus='' damage='' type=''>,
+      <Record pc_id=1 name='' bonus='' damage='' type=''>,
+    ]),
+    list([
+      <Record pc_id=2 level=0 total='' expended=''>,
+      <Record pc_id=1 level=0 total='' expended=''>,
+    ]),
+    list([
+      <Record pc_id=1 name='' level=0 prepared=False>,
+      <Record pc_id=2 name='' level=0 prepared=False>,
+    ]),
+  ])
+# ---
+# name: test_writes.7
+  list([
+    list([
+      <Record id=2 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+      <Record id=1 name='' class='' level=0 background='' race='' alignment='' xp='' age='' height='' wight='' eyes='' skin='' hair='' strength='' dexterity='' constitution='' intelligence='' wisdom='' charisma='' strength_mod='' dexterity_mod='' constitution_mod='' intelligence_mod='' wisdom_mod='' charisma_mod='' strength_sv='' dexterity_sv='' constitution_sv='' intelligence_sv='' wisdom_sv='' charisma_sv='' inspiration='' proficiency_bonus='' perseption='' acrobatics='' animal='' arcana='' athletics='' deception='' history='' insight='' intimidation='' investigation='' medicine='' nature='' perception='' performance='' persuasion='' religion='' sleight_of_hand='' stealth='' survival='' armor_class='' initiative='' speed='' hp_max='' hp_current='' hp_temp='' hit_dice='' hit_dice_total='' death_saves_successes='' death_saves_failures='' spell_cast_class='' spell_cast_ability='' spell_save_dc='' spell_attack_bonus='' spell_slot_total=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] spell_slot_expended=[0, 0, 0, 0, 0, 0, 0, 0, 0, 0] other_proficiencies_and_languages=[] equipment=[] features_and_traits=[] copper='' silver='' emerald='' gold='' platinum=''>,
+    ]),
+    list([
+      <Record pc_id=2 name='' bonus='' damage='' type=''>,
+      <Record pc_id=1 name='' bonus='' damage='' type=''>,
+    ]),
+    list([
+      <Record pc_id=2 level=0 total='' expended=''>,
+      <Record pc_id=1 level=0 total='' expended=''>,
+    ]),
+    list([
+      <Record pc_id=2 name='' level=0 prepared=False>,
+      <Record pc_id=1 name='' level=0 prepared=False>,
+    ]),
+  ])
+# ---

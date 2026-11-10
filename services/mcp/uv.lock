@@ -560,12 +560,12 @@ dependencies = [
     { name = "asyncpg" },
     { name = "mcp", extra = ["cli"] },
     { name = "pydantic" },
+    { name = "pytest-asyncio" },
 ]
 
 [package.dev-dependencies]
 dev = [
     { name = "pytest" },
-    { name = "pytest-asyncio" },
     { name = "syrupy" },
 ]
 
@@ -574,12 +574,12 @@ requires-dist = [
     { name = "asyncpg", specifier = ">=0.31.0" },
     { name = "mcp", extras = ["cli"], specifier = ">=2.1.1" },
     { name = "pydantic", specifier = ">=2.13.5" },
+    { name = "pytest-asyncio", specifier = ">=1.4.1.post1" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
     { name = "pytest", specifier = ">=9.2.0" },
-    { name = "pytest-asyncio", specifier = ">=1.4.1.post1" },
     { name = "syrupy", specifier = ">=6.1.1" },
 ]
 
