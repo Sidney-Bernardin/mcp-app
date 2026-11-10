@@ -1,11 +1,9 @@
 from pathlib import Path
 from urllib.parse import urlsplit
 
-import aggregates
 import asyncpg
-import config
-import entities
 import pytest_asyncio
+from domain import config
 
 migrations: list[str] | None = None
 
@@ -54,31 +52,3 @@ async def pg():
     yield conn
 
     await conn.close()
-
-
-@pytest_asyncio.fixture
-async def fake_playable_character(pg: asyncpg.Connection):
-
-    pc = aggregates.PlayableCharacter.model_validate(
-        dict(await pg.fetchrow("""SELECT * FROM playable_characters WHERE id = '1'""")),
-    )
-
-    pc.attacks = [
-        entities.Attack.model_validate(dict(row))
-        for row in await pg.fetch("""SELECT * FROM pc_attacks WHERE pc_id = '1'""")
-    ]
-
-    pc.spell_slots = [
-        aggregates.SpellSlot.model_validate(dict(row))
-        for row in await pg.fetch("""SELECT * FROM pc_spell_slots WHERE pc_id = '1'""")
-    ]
-
-    spells = [
-        entities.Spell.model_validate(dict(row))
-        for row in await pg.fetch("""SELECT * FROM pc_spells WHERE pc_id = '1'""")
-    ]
-
-    for spell in spells:
-        pc.spell_slots[spell.level].spells.append(spell)
-
-    yield pc

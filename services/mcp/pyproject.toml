@@ -24,4 +24,5 @@ build-backend = "uv_build"
 dev = [
     "pytest>=9.2.0",
     "pytest-asyncio>=1.4.1.post1",
+    "syrupy>=6.1.1",
 ]

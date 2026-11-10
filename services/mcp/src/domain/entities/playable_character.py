@@ -1,38 +1,112 @@
-import aggregates
-import entities
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
-class PlayableCharacterCreation(entities.PlayableCharacterBody):
-    attacks: list[entities.Attack]
-    spell_slots: list[aggregates.SpellSlot]
+class PlayableCharacterHead(BaseModel):
+    id: int
 
 
-class AttackUpdate(BaseModel):
-    name: str | None = None
-    bonus: int | None = None
-    damage: int | None = None
-    type: str | None = None
+class PlayableCharacterBody(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, serialize_by_alias=True)
+
+    name: str
+    class_: str = Field(alias="class")
+    level: int
+    background: str
+    race: str
+    alignment: str
+    xp: str
+
+    strength: str
+    dexterity: str
+    constitution: str
+    intelligence: str
+    wisdom: str
+    charisma: str
+
+    strength_mod: str
+    dexterity_mod: str
+    constitution_mod: str
+    intelligence_mod: str
+    wisdom_mod: str
+    charisma_mod: str
+
+    strength_sv: str
+    dexterity_sv: str
+    constitution_sv: str
+    intelligence_sv: str
+    wisdom_sv: str
+    charisma_sv: str
+
+    inspiration: str
+    proficiency_bonus: str
+    perseption: str
+
+    acrobatics: str
+    animal: str
+    arcana: str
+    athletics: str
+    deception: str
+    history: str
+    insight: str
+    intimidation: str
+    investigation: str
+    medicine: str
+    nature: str
+    perception: str
+    performance: str
+    persuasion: str
+    religion: str
+    sleight_of_hand: str
+    stealth: str
+    survival: str
+
+    armor_class: str
+    initiative: str
+    speed: str
+
+    hp_max: str
+    hp_current: str
+    hp_temp: str
+
+    hit_dice: str
+    hit_dice_total: str
+
+    death_saves_successes: str
+    death_saves_failures: str
+
+    other_proficiencies_and_languages: list[str]
+    equipment: list[str]
+    features_and_traits: list[str]
+
+    copper: str
+    silver: str
+    emerald: str
+    gold: str
+    platinum: str
+
+    age: str
+    height: str
+    wight: str
+    eyes: str
+    skin: str
+    hair: str
+
+    spell_cast_class: str
+    spell_cast_ability: str
+    spell_save_dc: str
+    spell_attack_bonus: str
 
 
-class SpellUpdate(BaseModel):
-    name: str | None = None
-    level: int | None = None
-    prepared: bool | None = None
+class PlayableCharacter(PlayableCharacterHead, PlayableCharacterBody):
+    pass
 
 
-class SpellSlotUpdate(BaseModel):
-    level: str | None = None
-    total: str | None = None
-    expended: str | None = None
+class PartialPlayableCharacter(BaseModel):
+    model_config = ConfigDict(populate_by_name=True, serialize_by_alias=True)
 
-    spells: list[SpellUpdate]
-
-
-class PlayableCharacterUpdate(BaseModel):
     name: str | None
-    classs: str | None = Field(alias="class", default=None)
-    level: str | None = None
+    class_: str | None = Field(alias="class", default=None)
+    level: int | None = None
     background: str | None = None
     race: str | None = None
     alignment: str | None = None
@@ -113,10 +187,7 @@ class PlayableCharacterUpdate(BaseModel):
     skin: str | None = None
     hair: str | None = None
 
-    spellcasting_class: str | None = None
+    spell_cast_class: str | None = None
     spell_cast_ability: str | None = None
     spell_save_dc: str | None = None
     spell_attack_bonus: str | None = None
-
-    attacks: list[AttackUpdate]
-    spell_slots: list[SpellSlotUpdate]
