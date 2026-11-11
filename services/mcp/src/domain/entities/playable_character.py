@@ -104,7 +104,7 @@ class PlayableCharacter(PlayableCharacterHead, PlayableCharacterBody):
 class PartialPlayableCharacter(BaseModel):
     model_config = ConfigDict(populate_by_name=True, serialize_by_alias=True)
 
-    name: str | None
+    name: str | None = None
     class_: str | None = Field(alias="class", default=None)
     level: int | None = None
     background: str | None = None

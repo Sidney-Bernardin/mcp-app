@@ -26,9 +26,9 @@ class CharacterSheet(PlayableCharacterHead, CharacterSheetBody):
 
 
 class PartialCharacterSheetSpellSlot(PartialSpellSlot):
-    spells: list[PartialSpell]
+    spells: list[PartialSpell] | None = None
 
 
 class PartialCharacterSheet(PartialPlayableCharacter):
-    attacks: list[PartialAttack]
-    spell_slots: list[PartialCharacterSheetSpellSlot]
+    attacks: list[PartialAttack] | None = None
+    spell_slots: list[PartialCharacterSheetSpellSlot] | None = None

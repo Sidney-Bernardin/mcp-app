@@ -1,5 +1,6 @@
 import asyncpg
 import pytest
+from domain.aggregates import CharacterSheet
 from domain.entities.attack import Attack, PartialAttack
 from domain.entities.playable_character import (
     PartialPlayableCharacter,
@@ -63,6 +64,8 @@ async def test_reads(subtests: pytest.Subtests, snapshot, pg: asyncpg.Connection
         (SpellSlot, pc_spell_slots.SELECT, (100,)),
         (Spell, pc_spells.SELECT, (1,)),
         (Spell, pc_spells.SELECT, (100,)),
+        (CharacterSheet, playable_characters.SELECT, (1,)),
+        (CharacterSheet, playable_characters.SELECT, (100,)),
     ]
 
     for model, query, args in tests:
